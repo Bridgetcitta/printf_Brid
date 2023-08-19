@@ -1,0 +1,20 @@
+#!/bin/bash
+cd "$(dirname "$0")"
+last_commit_timestamp=$(git log -1 --format=%ct)
+for file in *; do
+	    if [ -f "$file" ]; then
+		            file_timestamp=$(stat -c %Y "$file")
+			            if [ "$file_timestamp" -gt "$last_commit_timestamp" ]; then
+					                chmod u+x "$file"
+							        fi
+								    fi
+							    done
+							    git add .
+							    changes=$(git status --porcelain | awk '{print $2}')
+							    commit_message="Updated files:"
+							    for file in $changes; do
+								      commit_message="$commit_message $file"
+							      done
+							      git commit -m "$commit_message"
+							      git push
+
