@@ -1,62 +1,55 @@
-#include "main.h"
+#include <stdarg.h>
+#include <unistd.h>
 
 /**
- * _printf - produces output according to a format
- * @format: pointer to format string
+ * _printf - prints formatted output
+ * @format: format string containing directives
+ *
  * Return: number of characters printed
  */
 int _printf(const char *format, ...)
 {
-    int result = 0, str_len = 0;
-    char *str, c;
     va_list args;
-
-    if (format == NULL)
-        return (-1);
+    int count = 0;
 
     va_start(args, format);
 
-    while (*format != '\0')
+    while (*format)
     {
-        if (*format != '%')
-        {
-            write(1, format, 1);
-            result++;
-        }
-        else
+        if (*format == '%')
         {
             format++;
             if (*format == 'c')
             {
-                c = va_arg(args, int);
+                char c = va_arg(args, int);
                 write(1, &c, 1);
-                result++;
+                count++;
             }
             else if (*format == 's')
             {
-                str = va_arg(args, char*);
-                str_len = 0;
-                while (str[str_len] != '\0')
-                    str_len++;
-                write(1, str, str_len);
-                result += str_len;
+                char *s = va_arg(args, char *);
+                while (*s)
+                {
+                    write(1, s++, 1);
+                    count++;
+                }
             }
             else if (*format == '%')
             {
                 write(1, "%", 1);
-                result++;
-            }
-            else
-            {
-                write(1, "error: invalid conversion specifier\n", 36);
-                return (-1);
+                count++;
             }
         }
+        else
+        {
+            write(1, format, 1);
+            count++;
+        }
+
         format++;
     }
 
     va_end(args);
 
-    return (result);
+    return (count);
 }
-
