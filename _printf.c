@@ -10,13 +10,13 @@ int _printf(const char *format, ...)
 	char *str, c;
 	va_list args;
 
-	va_start(args, format);
-
 	if (format == NULL)
 		return (-1);
+	va_start(args, format);
+
 	while (*format)
 	{
-		if (*format != '%') /* if format is not the % sign */
+		if (*format != '%')
 		{
 			write(1, format, 1);
 			result++;
@@ -40,6 +40,8 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				str = va_arg(args, char*);
+				while (str[str_len] != '\0')
+					str_len++;
 				write(1, str, str_len);
 				result += str_len;
 			}
