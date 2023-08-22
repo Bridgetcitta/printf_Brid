@@ -3,22 +3,22 @@
 /************************* WRITE HANDLE *************************/
 /**
  * handle_write_char - Prints a string
- * @c: char types.
+ * @c: char line.
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags.
  * @width: get width.
- * @precision: precision specifier
+ * @precise: precise specifier
  * @size: Size specifier
  *
  * Return: Number of chars printed.
  */
 int handle_write_char(char c, char buffer[],
-	int flags, int width, int precision, int size)
+	int flags, int width, int precise, int size)
 { /* char is stored at left and paddind at buffer's right */
 	int i = 0;
 	char padd = ' ';
 
-	UNUSED(precision);
+	UNUSED(precise);
 	UNUSED(size);
 
 	if (flags & F_ZERO)
@@ -48,17 +48,17 @@ int handle_write_char(char c, char buffer[],
 /**
  * write_number - Prints a string
  * @is_negative: Lista of arguments
- * @ind: char types.
+ * @ind: char line.
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
  * @width: get width.
- * @precision: precision specifier
+ * @precise: precise specifier
  * @size: Size specifier
  *
  * Return: Number of chars printed.
  */
 int write_number(int is_negative, int ind, char buffer[],
-	int flags, int width, int precision, int size)
+	int flags, int width, int precise, int size)
 {
 	int length = BUFF_SIZE - ind - 1;
 	char padd = ' ', extra_ch = 0;
@@ -74,7 +74,7 @@ int write_number(int is_negative, int ind, char buffer[],
 	else if (flags & F_SPACE)
 		extra_ch = ' ';
 
-	return (write_num(ind, buffer, flags, width, precision,
+	return (write_num(ind, buffer, flags, width, precise,
 		length, padd, extra_ch));
 }
 
@@ -84,7 +84,7 @@ int write_number(int is_negative, int ind, char buffer[],
  * @buffer: Buffer
  * @flags: Flags
  * @width: width
- * @prec: Precision specifier
+ * @prec: precise specifier
  * @length: Number length
  * @padd: Pading char
  * @extra_c: Extra char
@@ -144,14 +144,14 @@ int write_num(int ind, char buffer[],
  * @buffer: Array of chars
  * @flags: Flags specifiers
  * @width: Width specifier
- * @precision: Precision specifier
+ * @precise: precise specifier
  * @size: Size specifier
  *
  * Return: Number of written chars.
  */
 int write_unsgnd(int is_negative, int ind,
 	char buffer[],
-	int flags, int width, int precision, int size)
+	int flags, int width, int precise, int size)
 {
 	/* The number is stored at the bufer's right and starts at position i */
 	int length = BUFF_SIZE - ind - 1, i = 0;
@@ -160,13 +160,13 @@ int write_unsgnd(int is_negative, int ind,
 	UNUSED(is_negative);
 	UNUSED(size);
 
-	if (precision == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0')
+	if (precise == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0')
 		return (0); /* printf(".0d", 0)  no char is printed */
 
-	if (precision > 0 && precision < length)
+	if (precise > 0 && precise < length)
 		padd = ' ';
 
-	while (precision > length)
+	while (precise > length)
 	{
 		buffer[--ind] = '0';
 		length++;
