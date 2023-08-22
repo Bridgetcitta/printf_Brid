@@ -6,7 +6,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int result = 0, str_len = 0;
+	int result = 0;
 	char *str, c;
 	va_list args;
 
@@ -21,7 +21,8 @@ int _printf(const char *format, ...)
 			result++;
 		}
 		else
-		{ format++;
+		{
+			format++;
 			if (*format == 'c')
 			{
 				c = va_arg(args, int);
@@ -31,10 +32,9 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				str = va_arg(args, char*);
-				while (str[str_len] != '\0')
-					str_len++;
-				write(1, str, str_len);
-				result += str_len;
+				while (*str != '\0')
+				write(1, str, 1);
+				result++;
 			}
 			else if (*format == '%')
 			{
