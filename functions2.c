@@ -20,14 +20,14 @@ int print_pointer(va_list line, char buffer[],
 	char map_to[] = "0123456789abcdef";
 	void *addrs = va_arg(line, void *);
 
-	first(width);
-	first(size);
+	UNUSED(width);
+	UNUSED(size);
 
 	if (addrs == NULL)
 		return (write(1, "(nil)", 5));
 
 	buffer[BUFF_SIZE - 1] = '\0';
-	first(precise);
+	UNUSED(precise);
 
 	num_addrs = (unsigned long)addrs;
 
@@ -69,10 +69,10 @@ int print_non_printable(va_list line, char buffer[],
 	int i = 0, offset = 0;
 	char *str = va_arg(line, char *);
 
-	first(flags);
-	first(width);
-	first(precise);
-	first(size);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precise);
+	UNUSED(size);
 
 	if (str == NULL)
 		return (write(1, "(null)", 6));
@@ -110,16 +110,16 @@ int print_reverse(va_list line, char buffer[],
 	char *str;
 	int i, count = 0;
 
-	first(buffer);
-	first(flags);
-	first(width);
-	first(size);
+	UNUSED(buffer);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(size);
 
 	str = va_arg(line, char *);
 
 	if (str == NULL)
 	{
-		first(precise);
+		UNUSED(precise);
 
 		str = ")Null(";
 	}
@@ -157,11 +157,11 @@ int print_rot13string(va_list line, char buffer[],
 	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
 	str = va_arg(line, char *);
-	first(buffer);
-	first(flags);
-	first(width);
-	first(precise);
-	first(size);
+	UNUSED(buffer);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precise);
+	UNUSED(size);
 
 	if (str == NULL)
 		str = "(AHYY)";

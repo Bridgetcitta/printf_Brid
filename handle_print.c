@@ -7,13 +7,13 @@
  * @buffer: Buffer array to handle print.
  * @flags: Calculates active flags
  * @width: get width.
- * @precision: Precision specification
+ * @precise: precise specification
  * @size: Size specifier
  *
  * Return: 1 or 2;
  */
 int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
-	int flags, int width, int precision, int size)
+	int flags, int width, int precise, int size)
 {
 	int i, unknow_len = 0, printed_chars = -1;
 	fmt_t fmt_line[] = {
@@ -25,7 +25,7 @@ int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
 	};
 	for (i = 0; fmt_line[i].fmt != '\0'; i++)
 		if (fmt[*ind] == fmt_line[i].fmt)
-			return (fmt_line[i].fn(list, buffer, flags, width, precision, size));
+			return (fmt_line[i].fn(list, buffer, flags, width, precise, size));
 
 	if (fmt_line[i].fmt == '\0')
 	{
