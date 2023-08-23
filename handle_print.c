@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * handle_print - Prints an argument based on its type
- * @fmt: Formatted string in which to print the arguments.
+ * @for_mat: Formatted string in which to print the arguments.
  * @list: List of arguments to be printed.
  * @ind: ind.
  * @buffer: Buffer array to handle print.
@@ -12,38 +12,38 @@
  *
  * Return: 1 or 2;
  */
-int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
+int handle_print(const char *for_mat, int *ind, va_list list, char buffer[],
 	int flags, int width, int precise, int size)
 {
 	int i, unknow_len = 0, printed_chars = -1;
-	fmt_t fmt_line[] = {
+	for_mat_t for_mat_line[] = {
 		{'c', print_char}, {'s', print_string}, {'%', print_percent},
 		{'i', print_int}, {'d', print_int}, {'b', print_binary},
 		{'u', print_unsigned}, {'o', print_octal}, {'x', print_hexadecimal},
 		{'X', print_hexa_upper}, {'p', print_pointer}, {'S', print_non_printable},
 		{'r', print_reverse}, {'R', print_rot13string}, {'\0', NULL}
 	};
-	for (i = 0; fmt_line[i].fmt != '\0'; i++)
-		if (fmt[*ind] == fmt_line[i].fmt)
-			return (fmt_line[i].fn(list, buffer, flags, width, precise, size));
+	for (i = 0; for_mat_line[i].for_mat != '\0'; i++)
+		if (for_mat[*ind] == for_mat_line[i].for_mat)
+			return (for_mat_line[i].fn(list, buffer, flags, width, precise, size));
 
-	if (fmt_line[i].fmt == '\0')
+	if (for_mat_line[i].for_mat == '\0')
 	{
-		if (fmt[*ind] == '\0')
+		if (for_mat[*ind] == '\0')
 			return (-1);
 		unknow_len += write(1, "%%", 1);
-		if (fmt[*ind - 1] == ' ')
+		if (for_mat[*ind - 1] == ' ')
 			unknow_len += write(1, " ", 1);
 		else if (width)
 		{
 			--(*ind);
-			while (fmt[*ind] != ' ' && fmt[*ind] != '%')
+			while (for_mat[*ind] != ' ' && for_mat[*ind] != '%')
 				--(*ind);
-			if (fmt[*ind] == ' ')
+			if (for_mat[*ind] == ' ')
 				--(*ind);
 			return (1);
 		}
-		unknow_len += write(1, &fmt[*ind], 1);
+		unknow_len += write(1, &for_mat[*ind], 1);
 		return (unknow_len);
 	}
 	return (printed_chars);
