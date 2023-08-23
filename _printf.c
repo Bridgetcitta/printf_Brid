@@ -5,7 +5,7 @@ void print_buffer(char buffer[], int *buff_ind);
 /**
  * _printf - Prints like printf
  * @format: format string
- * Return: succes
+ * Return: the number of characters printed
  */
 int _printf(const char *format, ...)
 {
@@ -47,7 +47,6 @@ int _printf(const char *format, ...)
 	print_buffer(buffer, &buff_ind);
 
 	va_end(list);
-
 	return (success);
 }
 
