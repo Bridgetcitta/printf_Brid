@@ -36,11 +36,11 @@ int print_string(va_list line, char buffer[],
 	int length = 0, i;
 	char *str = va_arg(line, char *);
 
-	UNUSED(buffer);
-	UNUSED(flags);
-	UNUSED(width);
-	UNUSED(precise);
-	UNUSED(size);
+	first(buffer);
+	first(flags);
+	first(width);
+	first(precise);
+	first(size);
 	if (str == NULL)
 	{
 		str = "(null)";
@@ -56,7 +56,7 @@ int print_string(va_list line, char buffer[],
 
 	if (width > length)
 	{
-		if (flags & F_MINUS)
+		if (flags & minus)
 		{
 			write(1, &str[0], length);
 			for (i = width - length; i > 0; i--)
@@ -88,12 +88,12 @@ int print_string(va_list line, char buffer[],
 int print_percent(va_list line, char buffer[],
 	int flags, int width, int precise, int size)
 {
-	UNUSED(line);
-	UNUSED(buffer);
-	UNUSED(flags);
-	UNUSED(width);
-	UNUSED(precise);
-	UNUSED(size);
+	first(line);
+	first(buffer);
+	first(flags);
+	first(width);
+	first(precise);
+	first(size);
 	return (write(1, "%%", 1));
 }
 
@@ -159,11 +159,11 @@ int print_binary(va_list line, char buffer[],
 	unsigned int a[32];
 	int count;
 
-	UNUSED(buffer);
-	UNUSED(flags);
-	UNUSED(width);
-	UNUSED(precise);
-	UNUSED(size);
+	first(buffer);
+	first(flags);
+	first(width);
+	first(precise);
+	first(size);
 
 	n = va_arg(line, unsigned int);
 	m = 2147483648; /* (2 ^ 31) */
