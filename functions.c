@@ -1,15 +1,14 @@
 #include "main.h"
 
-/************************* PRINT CHAR *************************/
 
 /**
- * print_char - Prints a char
+ * print_char - Prints a character
  * @line: List a of arguments
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
  * @width: Width
  * @precise: precise specification
- * @size: Size specifier
+ * @size: Size specification
  * Return: Number of chars printed
  */
 int print_char(va_list line, char buffer[],
@@ -17,11 +16,11 @@ int print_char(va_list line, char buffer[],
 {
 	char c = va_arg(line, int);
 
-	return (handle_write_char(c, buffer, flags, width, precise, size));
+	return (control_write_char(c, buffer, flags, width, precise, size));
 }
-/************************* PRINT A STRING *************************/
+
 /**
- * print_string - Prints a string
+ * print_str - Prints a string here
  * @line: List a of arguments
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
@@ -30,7 +29,7 @@ int print_char(va_list line, char buffer[],
  * @size: Size specifier
  * Return: Number of chars printed
  */
-int print_string(va_list line, char buffer[],
+int print_str(va_list line, char buffer[],
 	int flags, int width, int precise, int size)
 {
 	int length = 0, i;
@@ -74,7 +73,7 @@ int print_string(va_list line, char buffer[],
 
 	return (write(1, str, length));
 }
-/************************* PRINT PERCENT SIGN *************************/
+
 /**
  * print_percent - Prints a percent sign
  * @line: Lista of arguments
@@ -97,7 +96,6 @@ int print_percent(va_list line, char buffer[],
 	return (write(1, "%%", 1));
 }
 
-/************************* PRINT INT *************************/
 /**
  * print_int - Print int
  * @line: Lista of arguments
@@ -112,7 +110,7 @@ int print_int(va_list line, char buffer[],
 	int flags, int width, int precise, int size)
 {
 	int i = BUFF_SIZE - 2;
-	int is_negative = 0;
+	int is_not = 0;
 	long int n = va_arg(line, long int);
 	unsigned long int num;
 
@@ -127,7 +125,7 @@ int print_int(va_list line, char buffer[],
 	if (n < 0)
 	{
 		num = (unsigned long int)((-1) * n);
-		is_negative = 1;
+		is_not = 1;
 	}
 
 	while (num > 0)
@@ -138,7 +136,7 @@ int print_int(va_list line, char buffer[],
 
 	i++;
 
-	return (write_number(is_negative, i, buffer, flags, width, precise, size));
+	return (write_number(is_not, i, buffer, flags, width, precise, size));
 }
 
 /************************* PRINT BINARY *************************/

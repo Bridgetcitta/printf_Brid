@@ -17,11 +17,11 @@ int handle_print(const char *for_mat, int *ind, va_list list, char buffer[],
 {
 	int i, unknow_len = 0, printed_chars = -1;
 	for_mat_t for_mat_line[] = {
-		{'c', print_char}, {'s', print_string}, {'%', print_percent},
+		{'c', print_char}, {'s', print_str}, {'%', print_percent},
 		{'i', print_int}, {'d', print_int}, {'b', print_binary},
 		{'u', print_unsigned}, {'o', print_octal}, {'x', print_hexadecimal},
 		{'X', print_hexa_upper}, {'p', print_pointer}, {'S', print_non_printable},
-		{'r', print_reverse}, {'R', print_rot13string}, {'\0', NULL}
+		{'r', pt_rev}, {'R', print_rot13str}, {'\0', NULL}
 	};
 	for (i = 0; for_mat_line[i].for_mat != '\0'; i++)
 		if (for_mat[*ind] == for_mat_line[i].for_mat)

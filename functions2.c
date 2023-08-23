@@ -17,7 +17,7 @@ int print_pointer(va_list line, char buffer[],
 	char extra_c = 0, padd = ' ';
 	int ind = BUFF_SIZE - 2, length = 2, padd_start = 1; /* length=2, for '0x' */
 	unsigned long num_addrs;
-	char map_to[] = "0123456789abcdef";
+	char go_to[] = "0123456789abcdef";
 	void *addrs = va_arg(line, void *);
 
 	UNUSED(width);
@@ -33,7 +33,7 @@ int print_pointer(va_list line, char buffer[],
 
 	while (num_addrs > 0)
 	{
-		buffer[ind--] = map_to[num_addrs % 16];
+		buffer[ind--] = go_to[num_addrs % 16];
 		num_addrs /= 16;
 		length++;
 	}
@@ -94,7 +94,7 @@ int print_non_printable(va_list line, char buffer[],
 
 /************************* PRINT REVERSE *************************/
 /**
- * print_reverse - Prints reverse string.
+ * pt_rev - Prints reverse string.
  * @line: Lista of arguments
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
@@ -104,7 +104,7 @@ int print_non_printable(va_list line, char buffer[],
  * Return: Numbers of chars printed
  */
 
-int print_reverse(va_list line, char buffer[],
+int pt_rev(va_list line, char buffer[],
 	int flags, int width, int precise, int size)
 {
 	char *str;
@@ -137,7 +137,7 @@ int print_reverse(va_list line, char buffer[],
 }
 /************************* PRINT A STRING IN ROT13 *************************/
 /**
- * print_rot13string - Print a string in rot13.
+ * print_rot13str - Print a string in rot13.
  * @line: Lista of arguments
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
@@ -146,7 +146,7 @@ int print_reverse(va_list line, char buffer[],
  * @size: Size specifier
  * Return: Numbers of chars printed
  */
-int print_rot13string(va_list line, char buffer[],
+int print_rot13str(va_list line, char buffer[],
 	int flags, int width, int precise, int size)
 {
 	char x;

@@ -2,7 +2,7 @@
 
 /************************* WRITE HANDLE *************************/
 /**
- * handle_write_char - Prints a string
+ * control_write_char - Prints a string
  * @c: char line.
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags.
@@ -12,7 +12,7 @@
  *
  * Return: Number of chars printed.
  */
-int handle_write_char(char c, char buffer[],
+int control_write_char(char c, char buffer[],
 	int flags, int width, int precise, int size)
 { /* char is stored at left and paddind at buffer's right */
 	int i = 0;
@@ -47,7 +47,7 @@ int handle_write_char(char c, char buffer[],
 /************************* WRITE NUMBER *************************/
 /**
  * write_number - Prints a string
- * @is_negative: Lista of arguments
+ * @is_not: Lista of arguments
  * @ind: char line.
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
@@ -57,7 +57,7 @@ int handle_write_char(char c, char buffer[],
  *
  * Return: Number of chars printed.
  */
-int write_number(int is_negative, int ind, char buffer[],
+int write_number(int is_not, int ind, char buffer[],
 	int flags, int width, int precise, int size)
 {
 	int length = BUFF_SIZE - ind - 1;
@@ -67,7 +67,7 @@ int write_number(int is_negative, int ind, char buffer[],
 
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
 		padd = '0';
-	if (is_negative)
+	if (is_not)
 		extra_ch = '-';
 	else if (flags & F_PLUS)
 		extra_ch = '+';
@@ -139,7 +139,7 @@ int write_num(int ind, char buffer[],
 
 /**
  * write_unsgnd - Writes an unsigned number
- * @is_negative: Number indicating if the num is negative
+ * @is_not: Number indicating if the num is negative
  * @ind: Index at which the number starts in the buffer
  * @buffer: Array of chars
  * @flags: Flags specifiers
@@ -149,7 +149,7 @@ int write_num(int ind, char buffer[],
  *
  * Return: Number of written chars.
  */
-int write_unsgnd(int is_negative, int ind,
+int write_unsgnd(int is_not, int ind,
 	char buffer[],
 	int flags, int width, int precise, int size)
 {
@@ -157,7 +157,7 @@ int write_unsgnd(int is_negative, int ind,
 	int length = BUFF_SIZE - ind - 1, i = 0;
 	char padd = ' ';
 
-	UNUSED(is_negative);
+	UNUSED(is_not);
 	UNUSED(size);
 
 	if (precise == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0')

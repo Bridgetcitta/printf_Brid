@@ -117,7 +117,7 @@ int print_hexa_upper(va_list types, char buffer[],
 /**
  * print_hexa - Prints a hexadecimal number in lower or upper
  * @types: Lista of arguments
- * @map_to: Array of values to map the number to
+ * @go_to: Array of values to map the number to
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
  * @flag_ch: Calculates active flags
@@ -127,7 +127,7 @@ int print_hexa_upper(va_list types, char buffer[],
  * @size: Size specification
  * Return: Number of chars printed
  */
-int print_hexa(va_list types, char map_to[], char buffer[],
+int print_hexa(va_list types, char go_to[], char buffer[],
 	int flags, char flag_ch, int width, int precise, int size)
 {
 	int i = BUFF_SIZE - 2;
@@ -145,7 +145,7 @@ int print_hexa(va_list types, char map_to[], char buffer[],
 
 	while (num > 0)
 	{
-		buffer[i--] = map_to[num % 16];
+		buffer[i--] = go_to[num % 16];
 		num /= 16;
 	}
 
