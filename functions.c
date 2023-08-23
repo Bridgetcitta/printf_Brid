@@ -56,7 +56,7 @@ int print_string(va_list line, char buffer[],
 
 	if (width > length)
 	{
-		if (flags & minus)
+		if (flags & F_F_MINUS)
 		{
 			write(1, &str[0], length);
 			for (i = width - length; i > 0; i--)

@@ -38,9 +38,9 @@ int print_pointer(va_list line, char buffer[],
 		length++;
 	}
 
-	if ((flags & ZERO) && !(flags & minus))
+	if ((flags & F_ZERO) && !(flags & F_MINUS))
 		padd = '0';
-	if (flags & plus)
+	if (flags & F_PLUS)
 		extra_c = '+', length++;
 	else if (flags & F_SPACE)
 		extra_c = ' ', length++;
