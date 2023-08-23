@@ -5,7 +5,7 @@
  * print_pointer - Prints the value of a pointer variable
  * @line: List a of arguments
  * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
+ * @flags:  Calculates active flags on it
  * @width: get width
  * @precise: precise specification
  * @size: Size specifier
@@ -16,7 +16,7 @@ int print_pointer(va_list line, char buffer[],
 {
 	char extra_c = 0, padd = ' ';
 	int ind = BUFF_SIZE - 2, length = 2, padd_start = 1; /* length=2, for '0x' */
-	unsigned long num_addrs;
+	unsigned long numb_address;
 	char go_to[] = "0123456789abcdef";
 	void *addrs = va_arg(line, void *);
 
@@ -29,12 +29,12 @@ int print_pointer(va_list line, char buffer[],
 	buffer[BUFF_SIZE - 1] = '\0';
 	UNUSED(precise);
 
-	num_addrs = (unsigned long)addrs;
+	numb_address = (unsigned long)addrs;
 
-	while (num_addrs > 0)
+	while (numb_address > 0)
 	{
-		buffer[ind--] = go_to[num_addrs % 16];
-		num_addrs /= 16;
+		buffer[ind--] = go_to[numb_address % 16];
+		numb_address /= 16;
 		length++;
 	}
 
