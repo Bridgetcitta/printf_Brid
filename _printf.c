@@ -1,7 +1,5 @@
 #include "main.h"
 
-#define BUFF_SIZE 1024
-
 void print_buffer(char buffer[], int *buff_ind);
 
 /**
